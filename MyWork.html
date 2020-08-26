@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My to-do list</title>
+</head>
+<body>
+  <input type = "text" id = "input"></input>  
+  <button type = "button" id="add">Add the task</button>
+  <button class="btns"></button>
+  <ul id="list">
+  </ul>
+</body>
+</html>
+<script>
+    var string = '';
+    var input = document.querySelector('#input');
+    var btnForSubmit = document.querySelector('#add');
+    var list = document.querySelector('#list');
+    btnForSubmit.addEventListener('click', updateData);
+    var data = [{
+        text:'good',
+    }];
+    function render(){
+        var string = '';
+        console.log(data);
+        data.forEach(function(items, i){
+            string = string +`<li>${items.text}<button id= "btns" data-id="${ i }">delete</button></li>`
+        });
+        list.innerHTML = string;
+        var btns = document.querySelectorAll('#btns');
+        btns.forEach(function(btn){
+        btn.addEventListener('click', removeData);
+    })
+    }
+    function updateData(){
+        data.push({
+            text: input.value
+        });
+        render();  
+    }
+    function removeData(e){
+       data.splice(e.target.dataset.id, 1);
+        render();
+    }
+
+
+
+    
+
+</script>
